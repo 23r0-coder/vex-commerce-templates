@@ -4,6 +4,7 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { addItem } from 'components/cart/actions';
 import { useProduct } from 'components/product/product-context';
+import { primaryButtonStyle } from 'components/ui/theme-button-style';
 import { Product, ProductVariant } from 'lib/shopify/types';
 import { useActionState } from 'react';
 import { useCart } from './cart-context';
@@ -16,12 +17,12 @@ function SubmitButton({
   selectedVariantId: string | undefined;
 }) {
   const buttonClasses =
-    'relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white';
+    'relative flex w-full items-center justify-center bg-[var(--primary)] px-4 py-4 text-base font-semibold tracking-wide text-[var(--on-primary)] shadow-sm transition';
   const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
 
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(buttonClasses, disabledClasses)}>
+      <button disabled className={clsx(buttonClasses, disabledClasses)} style={primaryButtonStyle}>
         Out Of Stock
       </button>
     );
@@ -33,6 +34,7 @@ function SubmitButton({
         aria-label="Please select an option"
         disabled
         className={clsx(buttonClasses, disabledClasses)}
+        style={primaryButtonStyle}
       >
         <div className="absolute left-0 ml-4">
           <PlusIcon className="h-5" />
@@ -48,6 +50,7 @@ function SubmitButton({
       className={clsx(buttonClasses, {
         'hover:opacity-90': true
       })}
+      style={primaryButtonStyle}
     >
       <div className="absolute left-0 ml-4">
         <PlusIcon className="h-5" />
