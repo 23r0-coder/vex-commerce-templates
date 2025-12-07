@@ -5,7 +5,7 @@ export type Props = {
   title?: string;
 };
 
-const interBold = fetch(new URL('../fonts/Inter-Bold.ttf', import.meta.url)).then(
+const interBold = fetch('https://rsms.me/inter/font-files/Inter-Bold.woff2').then(
   (res) => res.arrayBuffer()
 );
 
