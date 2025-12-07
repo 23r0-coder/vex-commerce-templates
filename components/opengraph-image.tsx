@@ -1,11 +1,15 @@
 import { ImageResponse } from 'next/og';
 import LogoIcon from './icons/logo';
-import { join } from 'path';
-import { readFile } from 'fs/promises';
 
 export type Props = {
   title?: string;
 };
+
+const interBold = fetch('https://rsms.me/inter/font-files/Inter-Bold.woff2').then(
+  (res) => res.arrayBuffer()
+);
+
+export const runtime = 'edge';
 
 export default async function OpengraphImage(
   props?: Props
@@ -17,8 +21,7 @@ export default async function OpengraphImage(
     ...props
   };
 
-  const file = await readFile(join(process.cwd(), './fonts/Inter-Bold.ttf'));
-  const font = Uint8Array.from(file).buffer;
+  const fontData = await interBold;
 
   return new ImageResponse(
     (
@@ -35,7 +38,7 @@ export default async function OpengraphImage(
       fonts: [
         {
           name: 'Inter',
-          data: font,
+          data: fontData,
           style: 'normal',
           weight: 700
         }
