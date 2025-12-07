@@ -5,6 +5,12 @@ export type Props = {
   title?: string;
 };
 
+const interBold = fetch(new URL('../fonts/Inter-Bold.ttf', import.meta.url)).then(
+  (res) => res.arrayBuffer()
+);
+
+export const runtime = 'edge';
+
 export default async function OpengraphImage(
   props?: Props
 ): Promise<ImageResponse> {
@@ -15,8 +21,7 @@ export default async function OpengraphImage(
     ...props
   };
 
-  const fontUrl = new URL('../fonts/Inter-Bold.ttf', import.meta.url);
-  const fontData = await fetch(fontUrl).then((res) => res.arrayBuffer());
+  const fontData = await interBold;
 
   return new ImageResponse(
     (
